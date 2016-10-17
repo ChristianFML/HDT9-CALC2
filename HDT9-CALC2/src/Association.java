@@ -8,8 +8,7 @@
  *
  * @author usuario
  */
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class Association<K,V> implements Map.Entry<K,V>
 {
