@@ -27,7 +27,7 @@
  *
  ******************************************************************************/
 
-import java.util.NoSuchElementException;
+import java.util.*;
 
 /**
  *  The {@code BST} class represents an ordered symbol table of generic
@@ -65,12 +65,76 @@ import java.util.NoSuchElementException;
  *  @author Kevin Wayne
  */
 
-public class RedBlackBST<Key extends Comparable<Key>, Value> {
+/* *************************************************************************************************************************
+* **************************************************************************************************************************
+* RedBlackBST class MODIFIED for the specific use of this HDT9, using only the methods needed for its functioning
+* **************************************************************************************************************************
+* The methods wich throws an exxception are not used, but are needed because of the implementation of Map
+* **************************************************************************************************************************
+*/
+
+public class RedBlackBST<Key extends Comparable<Key>, Value> implements Map<Key, Value>{
 
     private static final boolean RED   = true;
     private static final boolean BLACK = false;
 
     private Node root;     // root of the BST
+
+    //NOT USED METHODS, JUST FOR THE IMPLEMENTANTION TO WORK CORRECTLY
+    @Override
+    public int size() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean containsKey(Object key) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean containsValue(Object value) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Value get(Object key) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Value remove(Object key) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void putAll(Map<? extends Key, ? extends Value> m) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void clear() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Set<Key> keySet() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Collection<Value> values() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Set<Entry<Key, Value>> entrySet() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Value put(Key key, Value value) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
     // BST helper node data type
     private class Node {
@@ -113,6 +177,7 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
      * Is this symbol table empty?
      * @return {@code true} if this symbol table is empty and {@code false} otherwise
      */
+    @Override
     public boolean isEmpty() {
         return root == null;
     }
@@ -159,29 +224,6 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
    /***************************************************************************
     *  Red-black tree insertion.
     ***************************************************************************/
-
-    /**
-     * Inserts the specified key-value pair into the symbol table, overwriting the old 
-     * value with the new value if the symbol table already contains the specified key.
-     * Deletes the specified key (and its associated value) from this symbol table
-     * if the specified value is {@code null}.
-     *
-     * @param key the key
-     * @param val the value
-     * @throws NullPointerException if {@code key} is {@code null}
-     */
-    public void put(Key key, Value val) {
-        if (key == null) throw new NullPointerException("first argument to put() is null");
-        if (val == null) {
-            delete(key);
-            return;
-        }
-
-        root = put(root, key, val);
-        root.color = BLACK;
-        // assert check();
-    }
-
     // insert the key-value pair in the subtree rooted at h
     private Node put(Node h, Key key, Value val) { 
         if (h == null) return new Node(key, val, RED, 1);
